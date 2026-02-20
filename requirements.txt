@@ -1,0 +1,2 @@
+# This project is R-first and does not require Python dependencies.
+# See README.md for reproducible execution using R, Makefile, or Docker.

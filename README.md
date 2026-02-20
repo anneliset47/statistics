@@ -1,50 +1,102 @@
-# Heart Disease Risk: Statistical Modeling Analysis
+# Heart Disease Risk Factor Analysis (R)
 
-## Overview
+Portfolio-ready statistical analysis project that investigates clinical and demographic drivers of heart disease using reproducible R workflows.
 
-This project analyzes demographic and clinical predictors of heart disease using inferential statistical methods. The objective is to identify which patient characteristics are significantly associated with heart disease and quantify the strength of those relationships.
+## Why this project matters
 
-The dataset contains 918 patient observations with demographic and cardiovascular indicators, including age, sex, chest pain type, resting blood pressure, cholesterol, fasting blood sugar, exercise-induced angina, and heart disease diagnosis.
+This repository demonstrates applied statistical analysis skills in a realistic healthcare context:
+- end-to-end data preparation,
+- exploratory analysis and visualization,
+- formal hypothesis testing,
+- reproducible project execution.
 
-## Research Questions
+The core outcome is a transparent, recruiter-reviewable pipeline from raw data to interpretable statistical results.
 
-1. Do demographic characteristics differ significantly between individuals with and without heart disease?
-2. Are certain groups at significantly higher risk of developing heart disease?
-3. Which clinical markers show the strongest statistical association with heart disease?
+## Dataset
 
-## Methods
+- Source: [Kaggle – Heart Failure Prediction](https://www.kaggle.com/datasets/fedesoriano/heart-failure-prediction)
+- Observations: 918 patients
+- Target variable: `HeartDisease` (No/Yes)
+- Key predictors: `Age`, `Sex`, `ChestPainType`, `RestingBP`, `Cholesterol`, `FastingBS`, `ExerciseAngina`, `MaxHR`
 
-This analysis incorporates multiple core statistical techniques:
+## Project structure
 
-- Exploratory Data Analysis (EDA)
-- Summary statistics and visualization
-- Independent t-tests (mean comparisons)
-- Two-proportion z-tests
-- Confidence interval estimation
-- Bootstrapping for validation of results
-- Formal hypothesis testing framework
+```
+data/
+	raw/heart_disease_data.csv
+	processed/heart_disease_processed.csv
+figures/
+notebooks/
+	heart_disease_analysis.ipynb
+report/
+	heart_disease_statistical_report.pdf
+	analysis_summary.md
+	results_summary.csv
+scripts/
+	install_packages.R
+	prepare_data.R
+	run_analysis.R
+Makefile
+Dockerfile
+```
 
-Bootstrapping was applied to validate parametric results and assess robustness beyond normality assumptions.
+## Reproducibility quickstart
 
-## Key Findings
+### Option 1: Local R (recommended)
 
-- Individuals with heart disease are, on average, several years older than those without heart disease.
-- Males exhibit a significantly higher prevalence of heart disease compared to females.
-- Elevated fasting blood sugar (>120 mg/dL) is strongly associated with heart disease.
-- Exercise-induced angina and asymptomatic chest pain patterns show statistically significant differences in disease prevalence.
+Prerequisites:
+- R 4.2+
+- `Rscript` available in PATH
 
-These findings align with established cardiovascular risk research and reinforce the role of demographic and metabolic risk factors in heart disease outcomes.
+Run from repository root:
 
-## Limitations
+```bash
+make install
+make analyze
+```
 
-- Observational dataset limits causal inference.
-- Sample contains disproportionate representation of males.
-- Limited socioeconomic and lifestyle variables.
-- Some missing values required imputation.
+This will:
+1. install required R packages,
+2. create processed data,
+3. generate key figures,
+4. export statistical test results to `report/results_summary.csv`.
 
-## Future Work
+### Option 2: Containerized run
 
-- Multivariate logistic regression modeling
-- Interaction effect analysis
-- Predictive risk modeling
-- Incorporation of additional behavioral variables
+```bash
+docker build -t heart-disease-risk .
+docker run --rm -v "$PWD":/app heart-disease-risk
+```
+
+## Analysis approach
+
+- Deterministic preprocessing with explicit factor encoding and median imputation for zero-coded physiologic values.
+- Exploratory plots focused on disease prevalence and age distributions.
+- Hypothesis tests:
+	- One-sided two-sample t-test (Age by disease status)
+	- One-sided two-proportion tests (Sex and FastingBS risk differences)
+- Bootstrap confidence interval estimation in the notebook for robustness checks.
+
+## Deliverables
+
+- Main analysis notebook: `notebooks/heart_disease_analysis.ipynb`
+- Processed dataset: `data/processed/heart_disease_processed.csv`
+- Figure artifacts: `figures/`
+- Statistical results table: `report/results_summary.csv`
+
+## Professional highlights
+
+- Clear project narrative and assumptions
+- Scripted, repeatable pipeline (`make analyze`)
+- Notebook + scripted execution path for reviewer convenience
+- Container option for consistent execution across environments
+
+## Notes and limitations
+
+- Observational data supports association, not causation.
+- Class and demographic imbalance may influence effect-size interpretation.
+- Results should be treated as analytic evidence, not diagnostic guidance.
+
+## License
+
+This project is available under the terms in `LICENSE`.

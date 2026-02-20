@@ -1,0 +1,4 @@
+test,statistic,p.value,conf.low,conf.high,estimate,estimate1,estimate2,method,alternative
+Age t-test,-8.822540108922915,1,-6.346623526386675,Inf,-5.348386787017475,50.551219512195125,55.8996062992126,Welch Two Sample t-test,greater
+Sex proportion test,84.14510134633775,2.29880872540456e-20,0.3097187650423336,1,NA,0.6317241379310344,0.25906735751295334,2-sample test for equality of proportions with continuity correction,greater
+FastingBS proportion test,64.32067909335939,5.286509365904977e-16,0.25623920684196233,1,NA,0.794392523364486,0.48011363636363635,2-sample test for equality of proportions with continuity correction,greater
